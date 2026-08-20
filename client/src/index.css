@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand: #0071e3; /* Premium Apple Royal Blue */
+  --color-brand-hover: #005bb8;
+  --color-brand-light: #f5f9ff;
+  --color-brand-dark: #004a99;
+  
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-scale-up: scale-up 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-up: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased selection:bg-blue-100 selection:text-blue-900 transition-colors duration-200;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Dark mode overrides */
+  .dark body {
+    @apply bg-[#0a0a0a] text-neutral-100 selection:bg-blue-950 selection:text-blue-200;
+  }
+}
+
+/* Glassmorphism custom classes */
+.glass-nav {
+  @apply backdrop-blur-md bg-white/70 border-b border-neutral-200/50;
+}
+
+.dark .glass-nav {
+  @apply backdrop-blur-md bg-[#0a0a0a]/75 border-b border-neutral-800/50;
+}
+
+.glass-card {
+  @apply backdrop-blur-sm bg-white/60 border border-neutral-200/40 shadow-xs;
+}
+
+.dark .glass-card {
+  @apply backdrop-blur-sm bg-neutral-900/60 border border-neutral-800/40 shadow-xs;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-200 rounded-full hover:bg-neutral-300 transition-colors;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors;
+}
