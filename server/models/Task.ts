@@ -37,10 +37,27 @@ const taskSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
+    workspace: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Workspace",
+      required: [true, "Workspace ID is required"],
+    },
+
+    assignee: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,
   }
 );
+
+// Indexes for query performance optimization
+taskSchema.index({ workspace: 1, status: 1 });
+taskSchema.index({ workspace: 1, priority: 1 });
+taskSchema.index({ workspace: 1, dueDate: 1 });
+taskSchema.index({ owner: 1 });
 
 export default mongoose.model("Task", taskSchema);
